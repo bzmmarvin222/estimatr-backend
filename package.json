@@ -22,9 +22,11 @@
   "dependencies": {
     "@nestjs/common": "^5.4.0",
     "@nestjs/core": "^5.4.0",
+    "@nestjs/websockets": "^5.5.0",
     "reflect-metadata": "^0.1.12",
     "rimraf": "^2.6.2",
     "rxjs": "^6.2.2",
+    "sync_ot": "file:../../otts",
     "typescript": "^3.0.1"
   },
   "devDependencies": {
