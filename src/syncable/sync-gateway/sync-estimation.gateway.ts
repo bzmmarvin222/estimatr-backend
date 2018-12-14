@@ -41,7 +41,8 @@ export class SyncEstimationGateway implements OnGatewayConnection, OnGatewayDisc
     }
 
     handleDisconnect(client): any {
-        // console.log('client disconnected');
+        console.log('client disconnected');
+        console.log(client.id);
     }
 
     private broadCast(clientIds: ClientId[], toBroadcast: any): void {
