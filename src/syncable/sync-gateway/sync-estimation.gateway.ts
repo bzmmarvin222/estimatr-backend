@@ -28,15 +28,16 @@ export class SyncEstimationGateway implements OnGatewayConnection, OnGatewayDisc
     }
 
     @SubscribeMessage('message')
-    onEvent(client, data: Operation): void {
+    onEvent(client, data: string): void {
         // console.log(client.id);
         // console.log(client.handshake.headers);
         // console.log(data);
 
         const sessionId: SyncedSessionId = client.handshake.query.sessionId;
-        const operation: Operation = data;
+        const operation: Operation = JSON.parse(data);
+        this.sessionProvider.getSession(sessionId).queueOperation(operation);
         const sessionClientIds = this.sessionProvider.getClients(sessionId);
-        this.broadCast(sessionClientIds, operation);
+        this.broadCast(sessionClientIds, data);
     }
 
     handleDisconnect(client): any {
