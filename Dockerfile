@@ -1,7 +1,7 @@
 FROM node:dubnium-alpine
 
 WORKDIR /usr/src/app
-COPY dist/src/ /usr/src/app/dist
+COPY dist/ /usr/src/app/dist
 COPY ./package.json ./package-lock.json /usr/src/app/
 
 RUN npm install --only=production
