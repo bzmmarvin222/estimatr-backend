@@ -28,6 +28,7 @@ export class SessionProviderService {
         const resource = new SyncableResource(handler, projectRoot);
         // TODO: return the generated session id
         this.syncedSessions.set('x', resource);
+        this.connectedClients.set('x', []);
         return 'x';
     }
 }

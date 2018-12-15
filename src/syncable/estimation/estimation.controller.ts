@@ -1,6 +1,8 @@
-import {Body, Controller, Post} from '@nestjs/common';
+import {Body, Controller, Put} from '@nestjs/common';
 import {SessionProviderService} from '../services/session-provider/session-provider.service';
 import {EstimationRoot} from '../shared/estimation';
+import {SessionCreatedDto} from '../shared/dtos/session-created-dto';
+import {SyncedSessionId} from '../shared/synced-session';
 
 @Controller('api/estimation')
 export class EstimationController {
@@ -9,8 +11,9 @@ export class EstimationController {
 
     }
 
-    @Post()
-    newProject(@Body() projectRoot: EstimationRoot): string {
-        return this.sessionProvider.createSession(projectRoot);
+    @Put()
+    newProject(@Body() projectRoot: EstimationRoot): SessionCreatedDto {
+        const sessionId: SyncedSessionId = this.sessionProvider.createSession(projectRoot);
+        return {sessionId};
     }
 }
