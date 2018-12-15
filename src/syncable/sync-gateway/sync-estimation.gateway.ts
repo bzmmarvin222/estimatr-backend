@@ -11,9 +11,14 @@ export class SyncEstimationGateway implements OnGatewayConnection, OnGatewayDisc
     constructor(private readonly sessionProvider: SessionProviderService) {
     }
 
-    handleConnection(client, ...args: any[]): any {
-        this.sessionProvider.getSession('x').getTree$().pipe(take(1)).subscribe(v => {
-            let init = {
+    handleConnection(client, ...args: any[]): void {
+        const sessionId: SyncedSessionId = client.handshake.query.sessionId;
+        const session = this.sessionProvider.getSession(sessionId);
+        if (!session) {
+            return;
+        }
+        session.getTree$().pipe(take(1)).subscribe(v => {
+            const init = {
                 range: {
                     start: -1,
                     end: -1,
@@ -22,7 +27,7 @@ export class SyncEstimationGateway implements OnGatewayConnection, OnGatewayDisc
                 data: v.toNonRecursive(),
                 objectPath: [],
             };
-            this.sessionProvider.getClients('x').push(client.id);
+            this.sessionProvider.getClients(sessionId).push(client.id);
             client.emit('init', init);
         });
     }

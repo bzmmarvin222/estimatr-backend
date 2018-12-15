@@ -1,7 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import {Injectable} from '@nestjs/common';
 import {ClientId, ConnectedClients, SyncedSession, SyncedSessionId} from '../../shared/synced-session';
 import {ServerHandler, SyncableResource} from 'sync_ot';
 import {EstimationNode, EstimationRoot} from '../../shared/estimation';
+import {Guid} from 'guid-typescript';
 
 @Injectable()
 export class SessionProviderService {
@@ -13,22 +14,21 @@ export class SessionProviderService {
     }
 
     public getSession(sessionId: SyncedSessionId): SyncableResource<EstimationNode> {
-        let session: SyncableResource<EstimationNode> = this.syncedSessions.get(sessionId);
-        if (!session) {
-           // TODO: this should query an old session from storage or something
-            this.createSession({projectTitle: 'Test', riskFactors: {low: 1, moderate: 1.5, high: 2, showstopper: 99}});
-            session = this.syncedSessions.get(sessionId);
-            this.connectedClients.set(sessionId, []);
-        }
-        return session;
+        // if (!session) {
+        //    // TODO: this should query an old session from storage or something
+        //     this.createSession({projectTitle: 'Test', riskFactors: {low: 1, moderate: 1.5, high: 2, showstopper: 99}});
+        //     session = this.syncedSessions.get(sessionId);
+        //     this.connectedClients.set(sessionId, []);
+        // }
+        return this.syncedSessions.get(sessionId);
     }
 
-    public createSession(projectRoot: EstimationRoot): string {
+    public createSession(projectRoot: EstimationRoot): SyncedSessionId {
         const handler = new ServerHandler();
         const resource = new SyncableResource(handler, projectRoot);
-        // TODO: return the generated session id
-        this.syncedSessions.set('x', resource);
-        this.connectedClients.set('x', []);
-        return 'x';
+        const sessionId: SyncedSessionId = Guid.create().toString();
+        this.syncedSessions.set(sessionId, resource);
+        this.connectedClients.set(sessionId, []);
+        return sessionId;
     }
 }
