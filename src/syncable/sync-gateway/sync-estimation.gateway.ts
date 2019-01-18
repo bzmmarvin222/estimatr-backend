@@ -14,6 +14,8 @@ export class SyncEstimationGateway implements OnGatewayConnection, OnGatewayDisc
     handleConnection(client, ...args: any[]): void {
         const sessionId: SyncedSessionId = client.handshake.query.sessionId;
         const session = this.sessionProvider.getSession(sessionId);
+        const authToken: string = client.handshake.headers.authorization;
+        console.log('AuthToken: ' + authToken);
         if (!session) {
             return;
         }
