@@ -1,4 +1,4 @@
-import {Risk, RiskFactors} from "./risk";
+import {Risk, RiskFactors} from './risk';
 
 export interface EstimationLeaf {
   taskDescription: string;
