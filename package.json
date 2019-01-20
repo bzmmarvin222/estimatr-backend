@@ -28,7 +28,7 @@
     "reflect-metadata": "^0.1.12",
     "rimraf": "^2.6.2",
     "rxjs": "^6.2.2",
-    "sync_ot": "^0.1.5",
+    "sync_ot": "^0.1.6",
     "typeorm": "^0.2.12",
     "typescript": "^3.0.1"
   },
