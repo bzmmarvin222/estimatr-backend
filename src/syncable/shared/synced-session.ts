@@ -5,3 +5,4 @@ export type SyncedSessionId = string;
 export type ClientId = string;
 export type SyncedSession = Map<SyncedSessionId, SyncableResource<EstimationNode>>;
 export type ConnectedClients = Map<SyncedSessionId, ClientId[]>;
+export type ClientSessions = Map<ClientId, SyncedSessionId>;
