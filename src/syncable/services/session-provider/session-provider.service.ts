@@ -28,6 +28,9 @@ export class SessionProviderService {
             this.logger.log(`All clients in session ${estimationId} left.`);
             const session: SyncableResource<EstimationNode> = this.syncedSessions.get(estimationId);
             this.syncedSessions.delete(estimationId);
+            if (!session) {
+                return;
+            }
             this.estimation.updateEstimation(estimationId, session.getCurrentTree()).then(() => {
                 this.logger.log(`Session ${estimationId} successfully closed.`);
             });

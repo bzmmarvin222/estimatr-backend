@@ -39,7 +39,7 @@ export class SyncEstimationGateway implements OnGatewayConnection, OnGatewayDisc
 
     @SubscribeMessage('message')
     async onEvent(client, data: string): Promise<void> {
-        const estimationId: EstimationId = client.handshake.query.estimationId;
+        const estimationId: EstimationId = client.handshake.query.sessionId;
         const operation: Operation = JSON.parse(data);
         const session = await this.sessionProvider.getSession(estimationId);
         session.queueOperation(operation);
