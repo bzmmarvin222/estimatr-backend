@@ -1,8 +1,8 @@
 import {SyncableResource} from 'sync_ot';
 import {EstimationNode} from './estimation';
 
-export type SyncedSessionId = string;
+export type EstimationId = string;
 export type ClientId = string;
-export type SyncedSession = Map<SyncedSessionId, SyncableResource<EstimationNode>>;
-export type ConnectedClients = Map<SyncedSessionId, ClientId[]>;
-export type ClientSessions = Map<ClientId, SyncedSessionId>;
+export type SyncedSession = Map<EstimationId, SyncableResource<EstimationNode>>;
+export type ConnectedClients = Map<EstimationId, ClientId[]>;
+export type ClientSessions = Map<ClientId, EstimationId>;

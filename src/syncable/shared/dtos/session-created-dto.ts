@@ -1,5 +1,5 @@
-import {SyncedSessionId} from '../synced-session';
+import {EstimationId} from '../synced-session';
 
 export interface SessionCreatedDto {
-    sessionId: SyncedSessionId;
+    estimationId: EstimationId;
 }
