@@ -1,5 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { EstimationController } from './estimation.controller';
+import {SessionProviderService} from '../services/session-provider/session-provider.service';
 
 describe('Estimation Controller', () => {
   let module: TestingModule;
@@ -7,6 +8,7 @@ describe('Estimation Controller', () => {
   beforeAll(async () => {
     module = await Test.createTestingModule({
       controllers: [EstimationController],
+      providers: [SessionProviderService],
     }).compile();
   });
   it('should be defined', () => {
